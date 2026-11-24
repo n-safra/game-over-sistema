@@ -1,3 +1,12 @@
+/*
+Descricao: Projeto integrador - Blog de Conteúdo sobre games
+nome_arquivo: perfil.js
+nome_exercicio: Desafio - Sistema Game Over (Login, Perfil e Consulta)
+nome_aluno: Nicolas Safra Gazige
+email_aluno: nicolas.gazige@aluno.cps.sp.gov.br
+turma: WEBI-ISW028-A
+*/
+
 // =====================================================
 // Tela de Perfil
 // Mostra os dados do jogador e permite editar.

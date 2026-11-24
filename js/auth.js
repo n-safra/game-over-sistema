@@ -1,3 +1,12 @@
+/*
+Descricao: Projeto integrador - Blog de Conteúdo sobre games
+nome_arquivo: auth.js
+nome_exercicio: Desafio - Sistema Game Over (Login, Perfil e Consulta)
+nome_aluno: Nicolas Safra Gazige
+email_aluno: nicolas.gazige@aluno.cps.sp.gov.br
+turma: WEBI-ISW028-A
+*/
+
 // =====================================================
 // Proteção das páginas internas + botão "Sair"
 // Carregado no <head> do perfil e da consulta.
