@@ -18,7 +18,7 @@ const PERFIL_PADRAO = {
     usuario: "nicolas.go",
     email: "jogador@gameover.com",
     plataforma: "PlayStation",
-    bio: "Enfrento chefe no Dark Souls e na CLT, mas só um deles dá pra derrotar. Já sofri no Elden Ring e sempre volto pro LoL."
+    bio: "Não sei planejar, só sei dar Flash + R na hora certa. Às vezes na hora errada também. DEMACIA!"
 };
 
 const formPerfil = document.getElementById("form-perfil");
