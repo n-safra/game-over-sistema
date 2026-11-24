@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Consulta da estante de jogos no Game Over.">
+    <title>Minha Estante | Game Over</title>
+
+    <link rel="icon" href="../img/logo.svg" type="image/svg+xml">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+
+    <!-- Bloqueia a página se não estiver logado -->
+    <script src="../js/auth.js"></script>
+</head>
+<body>
+
+    <!-- Menu -->
+    <header>
+        <nav class="navbar navbar-expand-md navbar-dark barra-topo">
+            <div class="container">
+                <a class="navbar-brand d-flex align-items-center gap-2" href="perfil.html">
+                    <img src="../img/logo.svg" alt="" width="32" height="32">
+                    <span class="logo-texto">GAME OVER</span>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu"
+                        aria-controls="menu" aria-expanded="false" aria-label="Abrir menu">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="menu">
+                    <ul class="navbar-nav ms-auto align-items-md-center gap-md-2">
+                        <li class="nav-item"><a class="nav-link" href="perfil.html">Perfil</a></li>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="consulta.html">Minha estante</a></li>
+                        <li class="nav-item"><button type="button" class="btn btn-sair" data-sair>Sair</button></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container py-5">
+        <h1 class="titulo-pagina mb-2">Minha estante</h1>
+        <p class="texto-suave mb-4">Consulte os jogos que você zerou, está jogando, joga online ou quer jogar.</p>
+
+        <!-- Filtros -->
+        <section class="cartao mb-4" aria-labelledby="titulo-filtros">
+            <h2 id="titulo-filtros" class="visually-hidden">Filtros</h2>
+            <form id="form-filtros" role="search">
+                <div class="row g-3 align-items-end">
+                    <div class="col-md-6">
+                        <label for="pesquisa" class="form-label">Pesquisar</label>
+                        <input type="search" id="pesquisa" name="pesquisa" class="form-control"
+                               placeholder="Nome, gênero ou ano..." autocomplete="off">
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <label for="filtro-plataforma" class="form-label">Plataforma</label>
+                        <select id="filtro-plataforma" name="plataforma" class="form-select">
+                            <option value="">Todas</option>
+                            <option>PC</option>
+                            <option>PlayStation</option>
+                            <option>Xbox</option>
+                            <option>Switch</option>
+                        </select>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <label for="filtro-status" class="form-label">Status</label>
+                        <select id="filtro-status" name="status" class="form-select">
+                            <option value="">Todos</option>
+                            <option>Zerado</option>
+                            <option>Jogando</option>
+                            <option>Online</option>
+                            <option>Na fila</option>
+                        </select>
+                    </div>
+                </div>
+            </form>
+        </section>
+
+        <!-- Tabela -->
+        <section class="cartao p-0" aria-labelledby="titulo-tabela">
+            <div class="d-flex flex-wrap gap-2 justify-content-between align-items-center p-3 p-md-4 pb-0 pb-md-0">
+                <div>
+                    <h2 id="titulo-tabela" class="h5 fw-bold mb-0">Jogos</h2>
+                    <p id="contador-resultados" class="texto-suave small mb-0" aria-live="polite">0 jogos</p>
+                </div>
+                <button type="button" class="btn btn-primario" data-bs-toggle="modal" data-bs-target="#modal-jogo">
+                    + Adicionar jogo
+                </button>
+            </div>
+
+            <div class="table-responsive p-3 p-md-4">
+                <table class="table tabela-jogos align-middle mb-0">
+                    <caption class="visually-hidden">Lista de jogos da estante com plataforma, gênero, ano, status e nota</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">Jogo</th>
+                            <th scope="col">Plataforma</th>
+                            <th scope="col">Gênero</th>
+                            <th scope="col">Ano</th>
+                            <th scope="col">Status</th>
+                            <th scope="col" class="text-end">Nota</th>
+                            <th scope="col"><span class="visually-hidden">Ações</span></th>
+                        </tr>
+                    </thead>
+                    <!-- As linhas são montadas pelo js/consulta.js a partir da estante salva -->
+                    <tbody id="corpo-tabela"></tbody>
+                </table>
+
+                <p id="sem-resultados" class="sem-resultados d-none">Nenhum jogo encontrado com esses filtros.</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Janela "Adicionar jogo" -->
+    <div class="modal fade" id="modal-jogo" tabindex="-1" aria-labelledby="titulo-modal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content janela">
+                <form id="form-jogo" novalidate>
+                    <div class="modal-header">
+                        <h2 id="titulo-modal" class="modal-title h5 fw-bold">Adicionar jogo</h2>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div id="alerta-jogo" class="alert alert-danger d-none" role="alert"></div>
+
+                        <!-- Capa -->
+                        <div class="d-flex gap-3 align-items-center mb-3">
+                            <img id="previa-capa" src="../img/capa-vazia.svg" alt="Prévia da capa" width="90" height="120" class="previa-capa">
+                            <div class="flex-grow-1">
+                                <label for="campo-capa" class="form-label">Capa do jogo <span class="texto-suave fw-normal">(opcional)</span></label>
+                                <input type="file" id="campo-capa" name="capa" class="form-control" accept="image/png, image/jpeg, image/webp"
+                                       aria-describedby="ajuda-capa">
+                                <div id="ajuda-capa" class="form-text">PNG, JPG ou WebP até 5 MB. A imagem é reduzida e convertida para WebP automaticamente.</div>
+                            </div>
+                        </div>
+
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <label for="campo-nome-jogo" class="form-label">Nome do jogo</label>
+                                <input type="text" id="campo-nome-jogo" name="nome" class="form-control" maxlength="80" required>
+                                <div class="invalid-feedback">Informe o nome do jogo.</div>
+                            </div>
+                            <div class="col-6">
+                                <label for="campo-plataforma-jogo" class="form-label">Plataforma</label>
+                                <select id="campo-plataforma-jogo" name="plataforma" class="form-select" required>
+                                    <option value="">Selecione...</option>
+                                    <option>PC</option>
+                                    <option>PlayStation</option>
+                                    <option>Xbox</option>
+                                    <option>Switch</option>
+                                    <option>Mobile</option>
+                                </select>
+                                <div class="invalid-feedback">Escolha a plataforma.</div>
+                            </div>
+                            <div class="col-6">
+                                <label for="campo-genero" class="form-label">Gênero</label>
+                                <input type="text" id="campo-genero" name="genero" class="form-control" list="lista-generos" maxlength="30" required>
+                                <datalist id="lista-generos">
+                                    <option value="Ação">
+                                    <option value="Aventura">
+                                    <option value="Corrida">
+                                    <option value="Esporte">
+                                    <option value="FPS">
+                                    <option value="Luta">
+                                    <option value="Metroidvania">
+                                    <option value="Plataforma">
+                                    <option value="Roguelike">
+                                    <option value="RPG">
+                                    <option value="Sandbox">
+                                    <option value="Simulação">
+                                    <option value="Terror">
+                                </datalist>
+                                <div class="invalid-feedback">Informe o gênero.</div>
+                            </div>
+                            <div class="col-6">
+                                <label for="campo-ano" class="form-label">Ano de lançamento</label>
+                                <input type="number" id="campo-ano" name="ano" class="form-control" min="1970" max="2030" required>
+                                <div class="invalid-feedback">Digite um ano entre 1970 e 2030.</div>
+                            </div>
+                            <div class="col-6">
+                                <label for="campo-status" class="form-label">Status</label>
+                                <select id="campo-status" name="status" class="form-select">
+                                    <option>Jogando</option>
+                                    <option>Zerado</option>
+                                    <option>Online</option>
+                                    <option>Na fila</option>
+                                </select>
+                            </div>
+                            <div class="col-6">
+                                <label for="campo-nota" class="form-label">Nota <span class="texto-suave fw-normal">(0 a 10)</span></label>
+                                <input type="number" id="campo-nota" name="nota" class="form-control" min="0" max="10" step="0.1"
+                                       aria-describedby="ajuda-nota">
+                                <div id="ajuda-nota" class="form-text">Deixe vazio se ainda não quiser dar nota.</div>
+                                <div class="invalid-feedback">A nota vai de 0 a 10.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primario">Adicionar à estante</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <footer class="rodape">
+        <div class="container">Game Over &copy; 2026 · Projeto acadêmico</div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/jogos.js"></script>
+    <script src="../js/consulta.js"></script>
+</body>
+</html>

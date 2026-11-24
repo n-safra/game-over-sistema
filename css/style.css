@@ -1,0 +1,456 @@
+/* =====================================================
+   GAME OVER - Folha de estilo principal
+   Identidade visual: tema escuro, roxo + verde neon,
+   títulos em fonte pixelada (Press Start 2P) e
+   textos em Inter para boa leitura.
+   ===================================================== */
+
+/* ---------- 1. Variáveis (identidade visual) ---------- */
+:root {
+    --cor-fundo: #0d0e1a;
+    --cor-superficie: #171a2e;
+    --cor-superficie-2: #1f2340;
+    --cor-borda: #2a2f4f;
+    --cor-primaria: #8b5cf6;
+    --cor-primaria-escura: #7041e6;
+    --cor-destaque: #22e39a;
+    --cor-alerta: #fbbf24;
+    --cor-perigo: #ff5c7a;
+    --cor-texto: #e7e9f5;
+    --cor-texto-suave: #9aa0c3;
+
+    --fonte-texto: "Inter", system-ui, sans-serif;
+    --fonte-pixel: "Press Start 2P", monospace;
+
+    --raio: 12px;
+    --espaco: 1.5rem;
+    --sombra: 0 10px 30px rgba(0, 0, 0, 0.35);
+
+    /* Ajusta o Bootstrap para a nossa paleta */
+    --bs-body-bg: var(--cor-fundo);
+    --bs-body-color: var(--cor-texto);
+    --bs-body-font-family: var(--fonte-texto);
+    --bs-border-color: var(--cor-borda);
+    --bs-secondary-color: var(--cor-texto-suave);
+    --bs-link-color-rgb: 34, 227, 154;
+    --bs-link-hover-color-rgb: 120, 240, 190;
+    --bs-form-invalid-color: var(--cor-perigo);
+    --bs-form-invalid-border-color: var(--cor-perigo);
+}
+
+/* ---------- 2. Base ---------- */
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto);
+    font-family: var(--fonte-texto);
+}
+
+main {
+    flex: 1;
+}
+
+img {
+    max-width: 100%;
+}
+
+code {
+    color: var(--cor-destaque);
+}
+
+.texto-suave {
+    color: var(--cor-texto-suave);
+}
+
+.texto-destaque {
+    color: var(--cor-destaque);
+}
+
+.logo-texto {
+    font-family: var(--fonte-pixel);
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    color: var(--cor-texto);
+}
+
+.titulo-pagina {
+    font-family: var(--fonte-pixel);
+    font-size: clamp(1rem, 3vw, 1.4rem);
+    line-height: 1.6;
+}
+
+/* Foco visível para quem navega pelo teclado */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: 3px solid var(--cor-destaque);
+    outline-offset: 2px;
+}
+
+/* ---------- 3. Componentes ---------- */
+
+/* Cartão padrão */
+.cartao {
+    background-color: var(--cor-superficie);
+    border: 1px solid var(--cor-borda);
+    border-radius: var(--raio);
+    padding: var(--espaco);
+    box-shadow: var(--sombra);
+}
+
+/* Campos de formulário */
+.form-label {
+    font-weight: 500;
+}
+
+.form-control,
+.form-select,
+.input-group-text {
+    background-color: var(--cor-superficie-2);
+    border-color: var(--cor-borda);
+    color: var(--cor-texto);
+}
+
+.form-control::placeholder {
+    color: #6b7199;
+}
+
+.form-control:focus,
+.form-select:focus {
+    background-color: var(--cor-superficie-2);
+    border-color: var(--cor-primaria);
+    color: var(--cor-texto);
+    box-shadow: 0 0 0 0.2rem rgba(139, 92, 246, 0.3);
+}
+
+.form-check-input:checked {
+    background-color: var(--cor-primaria);
+    border-color: var(--cor-primaria);
+}
+
+/* Botões */
+.btn-primario {
+    background-color: var(--cor-primaria);
+    border: none;
+    color: #fff;
+    font-weight: 600;
+    padding: 0.65rem 1.4rem;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.btn-primario:hover,
+.btn-primario:focus {
+    background-color: var(--cor-primaria-escura);
+    color: #fff;
+}
+
+.btn-primario:active {
+    transform: translateY(1px);
+}
+
+.btn-sair {
+    border: 1px solid var(--cor-perigo);
+    color: var(--cor-perigo);
+    padding: 0.3rem 1rem;
+}
+
+.btn-sair:hover {
+    background-color: var(--cor-perigo);
+    color: #fff;
+}
+
+.link-destaque {
+    color: var(--cor-destaque);
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.link-destaque:hover {
+    text-decoration: underline;
+}
+
+/* ---------- 4. Menu e rodapé ---------- */
+.barra-topo {
+    background-color: var(--cor-superficie);
+    border-bottom: 1px solid var(--cor-borda);
+}
+
+.barra-topo .nav-link {
+    color: var(--cor-texto-suave);
+    font-weight: 500;
+}
+
+.barra-topo .nav-link:hover,
+.barra-topo .nav-link.active {
+    color: var(--cor-destaque);
+}
+
+.rodape {
+    padding: 1.5rem 0;
+    border-top: 1px solid var(--cor-borda);
+    color: var(--cor-texto-suave);
+    font-size: 0.85rem;
+    text-align: center;
+}
+
+/* ---------- 5. Tela de login ---------- */
+.login-hero {
+    position: relative;
+    overflow: hidden;
+    min-height: 200px;
+}
+
+.login-hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    position: absolute;
+    inset: 0;
+}
+
+.login-hero-texto {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 2rem;
+    background: linear-gradient(transparent, rgba(13, 14, 26, 0.9));
+}
+
+.login-hero-texto .logo-texto {
+    font-size: clamp(1rem, 2.5vw, 1.6rem);
+    color: #fff;
+}
+
+.login-cartao {
+    width: 100%;
+    max-width: 420px;
+}
+
+.dica-teste {
+    border: 1px dashed var(--cor-borda);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    font-size: 0.85rem;
+    color: var(--cor-texto-suave);
+}
+
+/* ---------- 6. Tela de perfil ---------- */
+.avatar {
+    border-radius: 50%;
+    border: 3px solid var(--cor-primaria);
+    image-rendering: pixelated;
+}
+
+.lista-info li {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.6rem 0;
+    border-top: 1px solid var(--cor-borda);
+    font-size: 0.9rem;
+}
+
+.lista-info span {
+    color: var(--cor-texto-suave);
+}
+
+.lista-info strong {
+    text-align: right;
+    word-break: break-word;
+}
+
+.estatistica {
+    background-color: var(--cor-superficie);
+    border: 1px solid var(--cor-borda);
+    border-radius: var(--raio);
+    padding: 1rem;
+    text-align: center;
+}
+
+.estatistica strong {
+    display: block;
+    font-family: var(--fonte-pixel);
+    font-size: 1.3rem;
+    color: var(--cor-destaque);
+    margin-bottom: 0.5rem;
+}
+
+.estatistica span {
+    color: var(--cor-texto-suave);
+    font-size: 0.85rem;
+}
+
+/* ---------- 7. Tela de consulta ---------- */
+.tabela-jogos {
+    --bs-table-bg: transparent;
+    --bs-table-color: var(--cor-texto);
+    --bs-table-border-color: var(--cor-borda);
+    --bs-table-hover-bg: var(--cor-superficie-2);
+    --bs-table-hover-color: var(--cor-texto);
+    min-width: 640px;
+}
+
+.tabela-jogos thead th {
+    color: var(--cor-texto-suave);
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.tabela-jogos tbody tr:hover {
+    background-color: var(--cor-superficie-2);
+}
+
+.jogo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-weight: 500;
+}
+
+.jogo img {
+    border-radius: 4px;
+    flex-shrink: 0;
+}
+
+.nota {
+    font-family: var(--fonte-pixel);
+    font-size: 0.75rem;
+    color: var(--cor-destaque);
+}
+
+/* Selos de status */
+.selo {
+    display: inline-block;
+    padding: 0.25rem 0.7rem;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.status-zerado {
+    background-color: rgba(34, 227, 154, 0.15);
+    color: var(--cor-destaque);
+}
+
+.status-jogando {
+    background-color: rgba(139, 92, 246, 0.2);
+    color: #b9a0ff;
+}
+
+.status-online {
+    background-color: rgba(56, 189, 248, 0.15);
+    color: #38bdf8;
+}
+
+/* Bolinha "ao vivo" antes do texto Online */
+.status-online::before {
+    content: "";
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin-right: 6px;
+    border-radius: 50%;
+    background-color: #38bdf8;
+    vertical-align: middle;
+    animation: piscar 1.6s ease-in-out infinite;
+}
+
+@keyframes piscar {
+    50% {
+        opacity: 0.3;
+    }
+}
+
+/* Respeita quem prefere menos animação */
+@media (prefers-reduced-motion: reduce) {
+    .status-online::before {
+        animation: none;
+    }
+}
+
+.status-fila {
+    background-color: rgba(251, 191, 36, 0.15);
+    color: var(--cor-alerta);
+}
+
+.jogo img {
+    object-fit: cover;
+}
+
+.btn-remover {
+    background: none;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    color: var(--cor-texto-suave);
+    padding: 0.2rem 0.55rem;
+    line-height: 1;
+    transition: color 0.2s, border-color 0.2s;
+}
+
+.btn-remover:hover {
+    color: var(--cor-perigo);
+    border-color: var(--cor-perigo);
+}
+
+/* Janela de adicionar jogo */
+.janela {
+    background-color: var(--cor-superficie);
+    border: 1px solid var(--cor-borda);
+    border-radius: var(--raio);
+    color: var(--cor-texto);
+}
+
+.janela .modal-header,
+.janela .modal-footer {
+    border-color: var(--cor-borda);
+}
+
+.previa-capa {
+    border-radius: 6px;
+    object-fit: cover;
+    flex-shrink: 0;
+    background-color: var(--cor-superficie-2);
+}
+
+.form-control:disabled {
+    background-color: var(--cor-fundo);
+    opacity: 0.6;
+}
+
+.sem-resultados {
+    text-align: center;
+    color: var(--cor-texto-suave);
+    padding: 2rem 0 1rem;
+    margin: 0;
+}
+
+/* ---------- 8. Responsivo ---------- */
+@media (max-width: 991.98px) {
+    /* No celular a imagem do login vira um banner no topo */
+    .login-hero {
+        height: 220px;
+    }
+
+    .login-hero-texto {
+        padding: 1.25rem;
+    }
+}
+
+@media (max-width: 575.98px) {
+    :root {
+        --espaco: 1.1rem;
+    }
+
+    .logo-texto {
+        font-size: 0.7rem;
+    }
+}
