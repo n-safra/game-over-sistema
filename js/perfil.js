@@ -21,6 +21,9 @@ const PERFIL_PADRAO = {
     bio: "Não sei planejar, só sei dar Flash + R na hora certa. Às vezes na hora errada também. DEMACIA!"
 };
 
+// O número muda quando o perfil padrão muda, para ninguém ficar com o perfil antigo salvo
+const CHAVE_PERFIL = "perfil-v2";
+
 const formPerfil = document.getElementById("form-perfil");
 const alertaPerfil = document.getElementById("alerta-perfil");
 const campoBio = document.getElementById("campo-bio");
@@ -36,7 +39,7 @@ const campos = {
 
 // Lê o perfil salvo (ou usa o padrão)
 function carregarPerfil() {
-    const salvo = localStorage.getItem("perfil");
+    const salvo = localStorage.getItem(CHAVE_PERFIL);
     return salvo ? JSON.parse(salvo) : { ...PERFIL_PADRAO };
 }
 
@@ -100,7 +103,7 @@ formPerfil.onsubmit = function (event) {
         bio: campos.bio.value.trim()
     };
 
-    localStorage.setItem("perfil", JSON.stringify(perfil));
+    localStorage.setItem(CHAVE_PERFIL, JSON.stringify(perfil));
     mostrarPerfil(perfil);
     alertaPerfil.classList.remove("d-none");
 };
